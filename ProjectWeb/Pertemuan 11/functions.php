@@ -69,4 +69,22 @@ function Ubah($data){
     mysqli_query($conn, $query) or die(mysqli_error($conn));
     return mysqli_affected_rows($conn);
 }
+
+function Cari($keyword){
+    $conn = koneksi();
+
+    $query = "SELECT * FROM mahasiswa WHERE 
+                Nama LIKE '%$keyword%' OR
+                Nim LIKE '%$keyword%' OR
+                Email LIKE '%$keyword%' OR
+                Departemen LIKE '%$keyword%'";
+    
+    $result = mysqli_query($conn, $query);
+    $rows = [];
+    while($row = mysqli_fetch_assoc($result)){
+        $rows[] = $row;
+    }
+
+    return $rows;
+}
 ?>
