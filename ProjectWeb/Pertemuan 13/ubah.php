@@ -37,13 +37,13 @@ if (isset($_POST['Ubah'])) {
 
 <body>
     <h3>Form Ubah Data Mahasiswa</h3>
-    <form action="" method="POST">
+    <form action="" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="Id" required value="<?= $m['Id']; ?>">
         <ul>
             <li>
                 <label>
                     Gambar :
-                    <input type="text" name="Gambar" required value="<?= $m['Gambar']; ?>">
+                    <input type="file" name="Gambar" required value="<?= $m['Gambar']; ?>">
                 </label>
             </li>
             <li>

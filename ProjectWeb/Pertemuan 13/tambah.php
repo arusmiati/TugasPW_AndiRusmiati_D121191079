@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if(!isset($_SESSION['$login'])){
+if (!isset($_SESSION['$login'])) {
     header("Location: login.php");
     exit;
 }
@@ -33,36 +33,36 @@ if (isset($_POST['Tambah'])) {
 
 <body>
     <h3>Form Tambah Data Mahasiswa</h3>
-    <form action="" method="POST">
+    <form action="" method="POST" enctype="multipart/form-data">
         <ul>
             <li>
                 <label>
                     Gambar :
-                    <input type="text" name="Gambar" required>
+                    <input type="file" name="Gambar" required>
                 </label>
             </li>
             <li>
                 <label>
                     Nama :
-                    <input type="text" name="Nama" autofocus required>
+                    <input type="text" name="Nama" autofocus autocomplete="off" required>
                 </label>
             </li>
             <li>
                 <label>
                     Nim :
-                    <input type="text" name="Nim" required>
+                    <input type="text" name="Nim" autocomplete="off" required>
                 </label>
             </li>
             <li>
                 <label>
                     Email :
-                    <input type="text" name="Email" required>
+                    <input type="text" name="Email" autocomplete="off" required>
                 </label>
             </li>
             <li>
                 <label>
                     Departemen :
-                    <input type="text" name="Departemen" required>
+                    <input type="text" name="Departemen" autocomplete="off" required>
                 </label>
             </li>
 

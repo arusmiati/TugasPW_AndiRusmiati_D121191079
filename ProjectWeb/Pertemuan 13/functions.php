@@ -25,14 +25,76 @@ function query($query)
     return $rows;
 }
 
+function upload()
+{
+    $nama_file = $_FILES['Gambar']['name'];
+    $tipe_file = $_FILES['Gambar']['type'];
+    $ukuran_file = $_FILES['Gambar']['size'];
+    $error = $_FILES['Gambar']['error'];
+    $tmp_file = $_FILES['Gambar']['tmp_name'];
+
+    // ketika tidak ada gambar yang dipilih
+    if ($error == 4) {
+        echo "<script>
+                alert('pilih gambar terlebih dahulu!');
+              </script>";
+        return false;
+    }
+
+    // cek ekstensi file
+    $daftar_gambar = ['jpg', 'jpeg', 'png'];
+    $ekstensi_file = explode('.', $nama_file);
+    $ekstensi_file = strtolower(end($ekstensi_file));
+
+    if (!in_array($ekstensi_file, $daftar_gambar)) {
+        echo "<script>
+            alert('yang anda pilih bukan gambar!');
+          </script>";
+        return false;
+    }
+
+    // cek type file
+    if ($tipe_file != 'image/jpeg' && $tipe_file != 'image/png') {
+        echo "<script>
+            alert('yang anda pilih bukan gambar!');
+          </script>";
+        return false;
+    }
+
+    // cek ukuran file
+    // maksimal 5Mb == 5000000
+    if ($ukuran_file > 5000000) {
+        echo "<script>
+            alert('ukuran terlalu besar!');
+          </script>";
+        return false;
+    }
+
+    // lolos pengecekan
+    // siap upload file
+    // generate nama file baru
+    $nama_file_baru = uniqid();
+    $nama_file_baru .= '.';
+    $nama_file_baru .= $ekstensi_file;
+    move_uploaded_file($tmp_file, 'img/' . $nama_file_baru);
+
+    return $nama_file_baru;
+}
+
 function Tambah($data){
     $conn = koneksi();
 
-    $Gambar = htmlspecialchars($data['Gambar']);
+    //$Gambar = htmlspecialchars($data['Gambar']);
     $Nama = htmlspecialchars($data['Nama']);
     $Nim = htmlspecialchars($data['Nim']);
     $Email = htmlspecialchars($data['Email']);
-    $Departemen = htmlspecialchars($data['Departemen']);
+    $Departemen = htmlspecialchars($data['Departemen']); 
+
+    //upload gambar
+    $Gambar = upload();
+    if(!$Gambar){
+        return false;
+    }
     
     $query = "INSERT INTO mahasiswa VALUES (null, '$Gambar', '$Nama', '$Nim', '$Email', '$Departemen');";
 
@@ -52,11 +114,17 @@ function Ubah($data){
     $conn = koneksi();
 
     $Id = ($data['Id']);
-    $Gambar = htmlspecialchars($data['Gambar']);
+    //$Gambar = htmlspecialchars($data['Gambar']);
     $Nama = htmlspecialchars($data['Nama']);
     $Nim = htmlspecialchars($data['Nim']);
     $Email = htmlspecialchars($data['Email']);
     $Departemen = htmlspecialchars($data['Departemen']);
+
+    //upload gambar
+    $Gambar = upload();
+    if (!$Gambar) {
+        return false;
+    }
 
     $query = "UPDATE mahasiswa SET
                 Gambar = '$Gambar',
