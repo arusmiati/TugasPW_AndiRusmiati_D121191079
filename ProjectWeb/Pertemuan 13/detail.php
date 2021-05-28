@@ -27,7 +27,7 @@ $m = query("SELECT * FROM mahasiswa WHERE Id = $Id");
 <body>
     <h3>Detail Mahasiswa</h3>
     <ul>
-        <li><img src="img/<?= $m['Gambar']; ?>" width="60px"></li>
+        <li><img src="img/<?= $m['Gambar']; ?>" width="250px"></li>
         <li>Nama : <?= $m['Nama']; ?></li>
         <li>Nim : <?= $m['Nim']; ?></li>
         <li>Email : <?= $m['Email']; ?></li>

@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if(!isset($_SESSION['$login'])){
+if (!isset($_SESSION['$login'])) {
     header("Location: login.php");
     exit;
 }
@@ -41,33 +41,35 @@ if (isset($_POST['Ubah'])) {
         <input type="hidden" name="Id" required value="<?= $m['Id']; ?>">
         <ul>
             <li>
+                <input type="hidden" name="gambar_lama" value="<?= $m['Gambar']; ?>">
+                <img src="img/<?= $m['Gambar']; ?>" alt="" width="120" style="display: block;" class="img-preview">
                 <label>
                     Gambar :
-                    <input type="file" name="Gambar" required value="<?= $m['Gambar']; ?>">
+                    <input type="file" name="Gambar" class="Gambar" onchange="previewImage()">
                 </label>
             </li>
             <li>
                 <label>
                     Nama :
-                    <input type="text" name="Nama" autofocus required value="<?= $m['Nama']; ?>">
+                    <input type="text" name="Nama" autofocus required autocomplete="off" value="<?= $m['Nama']; ?>">
                 </label>
             </li>
             <li>
                 <label>
                     Nim :
-                    <input type="text" name="Nim" required value="<?= $m['Nim']; ?>">
+                    <input type="text" name="Nim" required autocomplete="off" value="<?= $m['Nim']; ?>">
                 </label>
             </li>
             <li>
                 <label>
                     Email :
-                    <input type="text" name="Email" required value="<?= $m['Email']; ?>">
+                    <input type="text" name="Email" required autocomplete="off" value="<?= $m['Email']; ?>">
                 </label>
             </li>
             <li>
                 <label>
                     Departemen :
-                    <input type="text" name="Departemen" required value="<?= $m['Departemen']; ?>">
+                    <input type="text" name="Departemen" autocomplete="off" required value="<?= $m['Departemen']; ?>">
                 </label>
             </li>
 
@@ -76,6 +78,8 @@ if (isset($_POST['Ubah'])) {
             </li>
         </ul>
     </form>
+
+    <script src="js/script.js"></script>
 </body>
 
 </html>

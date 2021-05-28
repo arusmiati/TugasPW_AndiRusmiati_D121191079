@@ -36,9 +36,11 @@ if (isset($_POST['Tambah'])) {
     <form action="" method="POST" enctype="multipart/form-data">
         <ul>
             <li>
+                <img src="img/image.jpg" alt="" width="120" style="display: block;" class="img-preview">
+
                 <label>
                     Gambar :
-                    <input type="file" name="Gambar" required>
+                    <input type="file" name="Gambar" class="Gambar" onchange="previewImage()">
                 </label>
             </li>
             <li>
@@ -71,6 +73,8 @@ if (isset($_POST['Tambah'])) {
             </li>
         </ul>
     </form>
+
+    <script src="js/script.js"></script>
 </body>
 
 </html>
